@@ -68,7 +68,7 @@ body {
           transform: translateX(-50%);
   width: 75px;
   height: 5px;
-  background-color: #ff5a00;
+  background-color: #442605;
 }
 
 .heading_container.heading_center {
@@ -208,7 +208,7 @@ a:focus {
   top: 0;
   left: 0;
   background-color: black;
-  background-color: rgba(72, 85, 254, 0.95);
+  background-color: #442605;
   overflow-x: hidden;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -293,7 +293,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: #4855fe;
+  color: #442605;
 }
 
 .slider_section .find_container .form-row {
@@ -339,19 +339,19 @@ a:focus {
   text-align: center;
   display: inline-block;
   padding: 10px 25px;
-  background-color: #ffe537;
+  background-color: #f4c87a;
   color: #000000;
   border-radius: 45px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: 1px solid #ffe537;
+  border: 1px solid #f4c87a;
   outline: none;
   text-transform: uppercase;
 }
 
 .slider_section .find_container form .btn-box button.btn:hover {
   background-color: transparent;
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 .slider_section .slider_container {
@@ -401,7 +401,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #ffe537;
+  background-color: #f4c87a;
   border-radius: 100%;
   font-size: 12px;
   color: #000000;
@@ -416,7 +416,7 @@ a:focus {
 
 .slider_section .slider_container .slick-prev:hover,
 .slider_section .slider_container .slick-next:hover {
-  background-color: #4855fe;
+  background-color: #442605;
   color: #ffffff;
 }
 
@@ -476,7 +476,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #4855fe;
+  background-color: #442605;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -485,7 +485,7 @@ a:focus {
 }
 
 .recipe_section .box .detail-box a:hover {
-  background-color: #ffe537;
+  background-color: #f4c87a;
   color: #000000;
 }
 
@@ -507,18 +507,18 @@ a:focus {
 .recipe_section .btn-box a {
   display: inline-block;
   padding: 10px 45px;
-  background-color: #ffe537;
+  background-color: #f4c87a;
   color: #000000;
   border-radius: 45px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: 1px solid #ffe537;
+  border: 1px solid #f4c87a;
   outline: none;
 }
 
 .recipe_section .btn-box a:hover {
   background-color: transparent;
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 .app_section {
@@ -541,7 +541,7 @@ a:focus {
 }
 
 .app_section .detail-box h2 span {
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 .app_section .detail-box p {
@@ -562,18 +562,18 @@ a:focus {
 .app_section .detail-box .download_btn {
   display: inline-block;
   padding: 12px 45px;
-  background-color: #ffe537;
+  background-color: #f4c87a;
   color: #000000;
   border-radius: 45px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: 1px solid #ffe537;
+  border: 1px solid #f4c87a;
   outline: none;
 }
 
 .app_section .detail-box .download_btn:hover {
   background-color: transparent;
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 .about_section .box {
@@ -594,7 +594,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #4855fe;
+  background-color: #442605;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -603,7 +603,7 @@ a:focus {
 }
 
 .about_section .detail-box a:hover {
-  background-color: #ffe537;
+  background-color: #f4c87a;
   color: #000000;
 }
 
@@ -631,7 +631,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #4855fe;
+  background-color: #442605;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -640,7 +640,7 @@ a:focus {
 }
 
 .news_section .box .detail-box a:hover {
-  background-color: #ffe537;
+  background-color: #f4c87a;
   color: #000000;
 }
 
@@ -673,7 +673,7 @@ a:focus {
 
 .client_section .detail-box i.fa-quote-left {
   font-size: 24px;
-  color: #4855fe;
+  color: #442605;
 }
 
 .client_section .carousel-control-next {
@@ -681,7 +681,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #ffe537;
+  background-color: #f4c87a;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -693,7 +693,7 @@ a:focus {
 }
 
 .client_section .carousel-control-next:hover {
-  background-color: #4855fe;
+  background-color: #442605;
   color: #ffffff;
 }
 
@@ -731,7 +731,7 @@ a:focus {
 }
 
 .info_section .contact_box a:hover {
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 .info_section .social_box {
@@ -750,7 +750,7 @@ a:focus {
 }
 
 .info_section .social_box a:hover {
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 .info_section .info_links {
@@ -778,7 +778,7 @@ a:focus {
 }
 
 .info_section .info_links ul li a:hover {
-  color: #ffe537;
+  color: #f4c87a;
 }
 
 /* footer section*/
