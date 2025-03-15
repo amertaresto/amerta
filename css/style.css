@@ -990,7 +990,11 @@ a:focus {
   justify-content: center;
 }
 
-.reservasi_section .detail-box h2,
+.reservasi_section .detail-box h2 {
+  font-family: "bodoni svtytwo sc itc tt book", sans-serif;
+  font-weight: 400;
+}
+
 .reservasi_section .detail-box h4 {
   margin-bottom: 15px;
   text-align: center;
