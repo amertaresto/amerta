@@ -679,11 +679,26 @@ a:focus {
 }
 
 .reservasi_section .form-control {
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #555;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
+  margin-bottom: 15px;
+}
+
+.reservasi_section .form-group {
+  margin-bottom: 15px;
+}
+
+.reservasi_section .form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.reservasi_section .form-row .form-control {
+  flex: 1;
 }
 
 .reservasi_section .btn-primary {
@@ -693,6 +708,7 @@ a:focus {
   border-radius: 5px;
   border: none;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 .reservasi_section .btn-primary:hover {
@@ -706,6 +722,7 @@ a:focus {
   overflow: hidden;
   max-width: 100%;
   background-color: #000;
+  margin-bottom: 15px;
 }
 
 .video-box iframe {
@@ -716,13 +733,11 @@ a:focus {
   height: 100%;
 }
 
-.bg-dark {
-  background-color: rgba(0, 0, 0, 0.7);
+.label-text {
+  margin-bottom: 5px;
+  color: #fff;
 }
 
-.p-5 {
-  padding: 3rem;
-}
 
 
 .about_section .box {
