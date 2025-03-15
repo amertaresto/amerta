@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Amerta Restaurant</title>
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- slidck slider -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map" integrity="undefined" crossorigin="anonymous" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+  <!-- Cart page style -->
+  <link href="css/cart.css" rel="stylesheet" />
+</head>
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              Amerta Restaurant
+            </span>
+          </a>
+          <div class="" id="">
+            <div class="User_option">
+              <a href="">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>Login</span>
+              </a>
+              <form class="form-inline ">
+                <button class="btn nav_cart-btn" type="button">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <img src="images/menu.png" alt="">
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="index.html">Beranda</a>
+                <a href="menu.html">Menu</a>
+                <a href="blog.html">Berita Terkini</a>
+                <a href="testimonial.html">Cerita Mereka di Amerta</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+    
+    <!-- cart section -->
+    <section class="cart_section layout_padding">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Pesanan Anda</h2>
+        </div>
+        
+        <!-- Form info pelanggan -->
+        <div class="customer_info">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="customerName">Nama</label>
+              <input type="text" class="form-control" id="customerName" placeholder="Masukkan nama Anda">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="tableNumber">Nomor Meja</label>
+              <input type="text" class="form-control" id="tableNumber" placeholder="Masukkan nomor meja">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Daftar pesanan -->
+        <div class="cart_items">
+          <!-- Item 1 -->
+          <div class="cart_item">
+            <div class="item_image">
+              <img src="images/menu-1.jpg" alt="Menu item">
+            </div>
+            <div class="item_details">
+              <h5 class="item_name">Sate Ayam Amerta</h5>
+              <div class="item_custom">
+                <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
+              </div>
+              <div class="item_row">
+                <div class="item_quantity">
+                  <button class="qty_btn minus"><i class="fa fa-minus"></i></button>
+                  <input type="text" class="qty_input" value="1" readonly>
+                  <button class="qty_btn plus"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="item_price">Rp 45.000</div>
+              </div>
+            </div>
+            <div class="item_remove">
+              <button class="remove_btn"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+          
+          <!-- Item 2 -->
+          <div class="cart_item">
+            <div class="item_image">
+              <img src="images/menu-2.jpg" alt="Menu item">
+            </div>
+            <div class="item_details">
+              <h5 class="item_name">Nasi Goreng Seafood</h5>
+              <div class="item_custom">
+                <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
+              </div>
+              <div class="item_row">
+                <div class="item_quantity">
+                  <button class="qty_btn minus"><i class="fa fa-minus"></i></button>
+                  <input type="text" class="qty_input" value="2" readonly>
+                  <button class="qty_btn plus"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="item_price">Rp 65.000</div>
+              </div>
+            </div>
+            <div class="item_remove">
+              <button class="remove_btn"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Promo & Total -->
+        <div class="cart_summary">
+          <div class="promo_section">
+            <input type="text" class="form-control promo_input" placeholder="Masukkan kode promo">
+            <button class="btn promo_btn">Terapkan</button>
+          </div>
+          
+          <div class="order_summary">
+            <div class="summary_row">
+              <span>Subtotal</span>
+              <span>Rp 175.000</span>
+            </div>
+            <div class="summary_row">
+              <span>Diskon</span>
+              <span>-Rp 0</span>
+            </div>
+            <div class="summary_row total">
+              <span>Total</span>
+              <span>Rp 175.000</span>
+            </div>
+            <div class="summary_notes">
+              <p>* Pajak sudah termasuk</p>
+              <p>** Pastikan pesanan Anda sudah sesuai</p>
+            </div>
+            <button class="btn order_btn">Konfirmasi Pesanan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end cart section -->
+
+    <!-- info section -->
+    <section class="info_section ">
+      <div class="container">
+        <div class="contact_box">
+          <a href="">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="info_links">
+          <ul>
+            <li class="active">
+              <a href="index.html">
+                Beranda
+              </a>
+            </li>
+            <li>
+              <a href="menu.html">
+                Menu
+              </a>
+            </li>
+            <li>
+              <a class="" href="blog.html">
+                Berita terkini
+              </a>
+            </li>
+            <li>
+              <a class="" href="testimonial.html">
+                Cerita Mereka di Amerta
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="social_box">
+          <a href="">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- end info_section -->
+    
+    <!-- footer section -->
+    <footer class="footer_section">
+      <div class="container">
+        <p>
+         &copy; <span id="displayYear"></span> All Rights Reserved By
+          <a href="https://html.design/">Amerta Restaurant</a><br>
+          Template By: <a href="https://themewagon.com/">ThemeWagon</a>
+        </p>
+      </div>
+    </footer>
+    <!-- footer section -->
+  </div>
+  <!-- jQery -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+  <!-- slick  slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="js/custom.js"></script>
+  <!-- cart js -->
+  <script src="js/cart.js"></script>
+</body>
+</html>
