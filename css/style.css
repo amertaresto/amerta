@@ -693,12 +693,19 @@ a:focus {
 
 .reservasi_section .form-row {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.reservasi_section .form-row > .form-group {
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-bottom: 15px;
 }
 
 .reservasi_section .form-row .form-control {
-  flex: 1;
+  width: 100%;
 }
 
 .reservasi_section .btn-primary {
@@ -734,8 +741,20 @@ a:focus {
 }
 
 .label-text {
+  display: block;
   margin-bottom: 5px;
   color: #fff;
+}
+
+/* Responsivitas untuk layar kecil */
+@media (max-width: 767px) {
+  .reservasi_section .form-row {
+    flex-direction: column;
+  }
+  
+  .reservasi_section .form-row > .form-group {
+    width: 100%;
+  }
 }
 
 
