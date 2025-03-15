@@ -659,30 +659,23 @@ a:focus {
 }
 
 .reservasi_section {
-  background-image: url(../images/app-bg.png);
-  background-size: 100% 100%;
+  background-image: url('../images/app-bg.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  padding: 225px 0 175px 0;
+  padding: 100px 0;
   color: #ffffff;
 }
 
 .reservasi_section .row {
   align-items: center;
+  justify-content: center;
 }
 
-.reservasi_section .detail-box h2 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-
+.reservasi_section .detail-box h2,
 .reservasi_section .detail-box h4 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-
-.reservasi_section .form-group {
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .reservasi_section .form-control {
@@ -696,10 +689,9 @@ a:focus {
 .reservasi_section .btn-primary {
   background-color: #f4c87a;
   color: #000;
-  padding: 10px 20px;
+  padding: 12px;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
@@ -707,11 +699,31 @@ a:focus {
   background-color: #d1a65f;
 }
 
-.video-box iframe {
-  width: 100%;
-  height: 315px;
-  border-radius: 10px;
+.video-box {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background-color: #000;
 }
+
+.video-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-dark {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.p-5 {
+  padding: 3rem;
+}
+
 
 .about_section .box {
   text-align: center;
