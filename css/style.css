@@ -659,11 +659,11 @@ a:focus {
 }
 
 .reservasi_section {
-  background-image: url('../images/app-bg.png');
-  background-size: cover;
+  background-image: url(../images/app-bg.png);
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
-  padding: 100px 0;
+  padding: 225px 0 175px 0;
   color: #ffffff;
 }
 
