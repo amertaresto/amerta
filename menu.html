@@ -90,13 +90,75 @@
         </h2>
       </div>
 
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Nasi</li>
-        <li data-filter=".pizza">Sup Kuah</li>
-        <li data-filter=".pasta">Penutup</li>
-        <li data-filter=".fries">Minum</li>
-      </ul>
+      <!-- Filter menu -->
+<ul class="filters_menu">
+  <li class="active" data-filter="*">All</li>
+  <li data-filter=".nasi">Nasi</li>
+  <li data-filter=".sup">Sup Kuah</li>
+  <li data-filter=".penutup">Penutup</li>
+  <li data-filter=".minum">Minum</li>
+</ul>
+
+<!-- Container untuk daftar menu -->
+<div class="row filters-content" id="menu-list"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+
+<!-- Script JS Firebase + load data -->
+<script>
+  // 1. Konfigurasi Firebase
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // 2. Inisialisasi Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // 3. Ambil data dari Realtime Database
+  const menuList = document.getElementById("menu-list");
+
+  firebase.database().ref("menu").once("value")
+    .then(snapshot => {
+      const data = snapshot.val();
+      let html = '';
+
+      for (let id in data) {
+        const item = data[id];
+        html += `
+          <div class="col-sm-6 col-lg-4 all ${item.kategori.toLowerCase()}">
+            <div class="box">
+              <div class="img-box">
+                <img src="${item.gambar}" alt="${item.nama}">
+              </div>
+              <div class="detail-box">
+                <h5>${item.nama}</h5>
+                <p>${item.deskripsi}</p>
+                <div class="options">
+                  <h6>Rp ${item.harga}</h6>
+                  <a href="#" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      menuList.innerHTML = html;
+    });
+</script>
+
+
 
       <div class="filters-content">
         <div class="row grid">
