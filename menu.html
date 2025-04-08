@@ -936,6 +936,34 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const filterButtons = document.querySelectorAll(".filters_menu li");
+      const filterItems = document.querySelectorAll(".filters-content .all");
+  
+      filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          // Hapus class 'active' dari semua tombol
+          filterButtons.forEach(btn => btn.classList.remove("active"));
+          // Tambahkan class 'active' ke tombol yang diklik
+          button.classList.add("active");
+  
+          const filter = button.getAttribute("data-filter").replace('.', '');
+  
+          filterItems.forEach(item => {
+            if (filter === "*" || item.classList.contains(filter)) {
+              item.style.display = "block";
+            } else {
+              item.style.display = "none";
+            }
+          });
+        });
+      });
+    });
+  </script>
+      
+  
 </body>
 
 </html>
