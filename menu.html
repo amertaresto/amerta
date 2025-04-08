@@ -166,6 +166,24 @@
 </script>
 
 
+<script>
+  // Tambahkan listener untuk filter kategori
+  document.querySelectorAll('.filters_menu li').forEach(item => {
+    item.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+      document.querySelectorAll('.filters_menu li').forEach(li => li.classList.remove('active'));
+      this.classList.add('active');
+
+      document.querySelectorAll('#menu-list > div').forEach(card => {
+        if (filter === '*' || card.classList.contains(filter.substring(1))) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 
 
   <!--    <div class="filters-content">
