@@ -169,6 +169,10 @@
             </div>
             <button class="btn order_btn">Konfirmasi Pesanan</button>
           </div>
+          
+          <!-- ⬇️ Ini div kosong untuk menampilkan hasil output -->
+          <div id="order-summary" class="mt-4"></div>
+          
         </div>
       </div>
     </section>
@@ -252,5 +256,62 @@
   <script src="js/custom.js"></script>
   <!-- cart js -->
   <script src="js/cart.js"></script>
+
+
+
+<script>
+  document.querySelector(".order_btn")?.addEventListener("click", () => {
+    const nama = document.getElementById("customerName").value.trim();
+    const meja = document.getElementById("tableNumber").value.trim();
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (!nama || !meja) {
+      alert("Silakan isi nama dan nomor meja.");
+      return;
+    }
+
+    const summaryDiv = document.getElementById("order-summary");
+    let total = 0;
+
+    let summaryHTML = `
+      <h4>✅ Ringkasan Pesanan</h4>
+      <p><strong>Nama:</strong> ${nama}</p>
+      <p><strong>Nomor Meja:</strong> ${meja}</p>
+      <table class="table table-bordered mt-2">
+        <thead><tr><th>Menu</th><th>Jumlah</th><th>Total</th></tr></thead>
+        <tbody>
+    `;
+
+    cart.forEach(item => {
+      const jumlah = item.jumlah || 1;
+      const itemTotal = item.harga * jumlah;
+      total += itemTotal;
+      summaryHTML += `
+        <tr>
+          <td>${item.nama}</td>
+          <td>${jumlah}</td>
+          <td>Rp ${itemTotal.toLocaleString("id-ID")}</td>
+        </tr>
+      `;
+    });
+
+    summaryHTML += `
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2"><strong>Total</strong></td>
+          <td><strong>Rp ${total.toLocaleString("id-ID")}</strong></td></tr>
+        </tfoot>
+      </table>
+    `;
+
+    summaryDiv.innerHTML = summaryHTML;
+
+    // Optional: kosongkan keranjang
+    localStorage.removeItem("cart");
+  });
+</script>
+
+    
+    
 </body>
 </html>
