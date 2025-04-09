@@ -221,5 +221,55 @@
   <script src="js/custom.js"></script>
   <!-- cart js -->
   <script src="js/cart.js"></script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let total = 0;
+
+    if (cartData.length === 0) {
+      cartItemsContainer.innerHTML = "<p>Keranjang masih kosong.</p>";
+    } else {
+      cartItemsContainer.innerHTML = cartData.map(item => {
+        const subtotal = item.harga * item.jumlah;
+        total += subtotal;
+        return `
+          <div class="cart_item">
+            <div class="item_image">
+              <img src="${item.gambar}" alt="${item.nama}">
+            </div>
+            <div class="item_details">
+              <h5 class="item_name">${item.nama}</h5>
+              <div class="item_custom">
+                <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
+              </div>
+              <div class="item_row">
+                <div class="item_quantity">
+                  <button class="qty_btn minus">-</button>
+                  <input type="text" class="qty_input" value="${item.jumlah}" readonly>
+                  <button class="qty_btn plus">+</button>
+                </div>
+                <div class="item_price">Rp ${subtotal.toLocaleString()}</div>
+              </div>
+            </div>
+            <div class="item_remove">
+              <button class="remove_btn">🗑</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Tampilkan total
+    document.querySelector(".summary_row.total span:last-child").textContent = `Rp ${total.toLocaleString()}`;
+    document.querySelector(".summary_row:nth-child(1) span:last-child").textContent = `Rp ${total.toLocaleString()}`;
+  });
+</script>
+
+
+    
 </body>
 </html>
