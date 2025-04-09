@@ -165,32 +165,6 @@
   });
 </script>
 
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-      const cartButtons = document.querySelectorAll(".add-to-cart");
-
-      cartButtons.forEach(button => {
-        button.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          const nama = this.dataset.nama;
-          const harga = parseInt(this.dataset.harga);
-          const gambar = this.dataset.gambar;
-
-          const item = { nama, harga, gambar };
-
-          let cart = JSON.parse(localStorage.getItem("cart")) || [];
-          cart.push(item);
-          localStorage.setItem("cart", JSON.stringify(cart));
-
-          alert(`${nama} berhasil ditambahkan ke keranjang!`);
-        });
-      });
-    }, 1000); // delay biar menu udah muncul
-  });
-</script>
       
 
 <script>
