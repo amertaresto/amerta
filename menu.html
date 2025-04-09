@@ -168,6 +168,38 @@
   }).catch((error) => {
     console.error("Gagal ambil data: ", error);
   });
+
+  
+  // Event listener untuk tombol add-to-cart
+document.addEventListener('click', function (e) {
+  if (e.target.closest('.add-to-cart')) {
+    e.preventDefault();
+    
+    const button = e.target.closest('.add-to-cart');
+    const nama = button.dataset.nama;
+    const harga = parseInt(button.dataset.harga);
+    const gambar = button.dataset.gambar;
+
+    const item = { nama, harga, gambar, jumlah: 1 };
+
+    // Ambil keranjang dari localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Cek apakah item sudah ada
+    const existingItem = cart.find(i => i.nama === item.nama);
+    if (existingItem) {
+      existingItem.jumlah += 1;
+    } else {
+      cart.push(item);
+    }
+
+    // Simpan kembali ke localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    alert(`${item.nama} ditambahkan ke keranjang!`);
+  }
+});
+
 </script>
 
 
