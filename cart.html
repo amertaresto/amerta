@@ -71,108 +71,77 @@
     </header>
     <!-- end header section -->
     
-    <!-- cart section -->
-    <section class="cart_section layout_padding">
-      <div class="container">
-        <div class="heading_container heading_center">
-          <h2>Pesanan Anda</h2>
+    <script>
+  // Ambil data dari localStorage
+  const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartItemsContainer = document.querySelector(".cart_items");
+
+  // Bersihkan container agar tidak dobel
+  cartItemsContainer.innerHTML = "";
+
+  // Render setiap item dari localStorage
+  cartData.forEach((item, index) => {
+    const itemElement = document.createElement("div");
+    itemElement.classList.add("cart_item");
+
+    itemElement.innerHTML = `
+      <div class="item_image">
+        <img src="${item.gambar}" alt="${item.nama}">
+      </div>
+      <div class="item_details">
+        <h5 class="item_name">${item.nama}</h5>
+        <div class="item_custom">
+          <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
         </div>
-        
-        <!-- Form info pelanggan -->
-        <div class="customer_info">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="customerName">Nama</label>
-              <input type="text" class="form-control" id="customerName" placeholder="Masukkan nama Anda">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="tableNumber">Nomor Meja</label>
-              <input type="text" class="form-control" id="tableNumber" placeholder="Masukkan nomor meja">
-            </div>
+        <div class="item_row">
+          <div class="item_quantity">
+            <button class="qty_btn minus">-</button>
+            <input type="text" class="qty_input" value="1" readonly>
+            <button class="qty_btn plus">+</button>
           </div>
-        </div>
-        
-        <!-- Daftar pesanan -->
-        <div class="cart_items">
-          <!-- Item 1 -->
-          <div class="cart_item">
-            <div class="item_image">
-              <img src="images/f1.png" alt="Menu item">
-            </div>
-            <div class="item_details">
-              <h5 class="item_name">Sop Iga Sapi</h5>
-              <div class="item_custom">
-                <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
-              </div>
-              <div class="item_row">
-                <div class="item_quantity">
-                  <button class="qty_btn minus"><i class="fa fa-minus"></i></button>
-                  <input type="text" class="qty_input" value="1" readonly>
-                  <button class="qty_btn plus"><i class="fa fa-plus"></i></button>
-                </div>
-                <div class="item_price">Rp 70.000</div>
-              </div>
-            </div>
-            <div class="item_remove">
-              <button class="remove_btn"><i class="fa fa-trash"></i></button>
-            </div>
-          </div>
-          
-          <!-- Item 2 -->
-          <div class="cart_item">
-            <div class="item_image">
-              <img src="images/menu-2.jpg" alt="Menu item">
-            </div>
-            <div class="item_details">
-              <h5 class="item_name">Nasi Goreng Seafood</h5>
-              <div class="item_custom">
-                <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
-              </div>
-              <div class="item_row">
-                <div class="item_quantity">
-                  <button class="qty_btn minus"><i class="fa fa-minus"></i></button>
-                  <input type="text" class="qty_input" value="2" readonly>
-                  <button class="qty_btn plus"><i class="fa fa-plus"></i></button>
-                </div>
-                <div class="item_price">Rp 65.000</div>
-              </div>
-            </div>
-            <div class="item_remove">
-              <button class="remove_btn"><i class="fa fa-trash"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Promo & Total -->
-        <div class="cart_summary">
-          <div class="promo_section">
-            <input type="text" class="form-control promo_input" placeholder="Masukkan kode promo">
-            <button class="btn promo_btn">Terapkan</button>
-          </div>
-          
-          <div class="order_summary">
-            <div class="summary_row">
-              <span>Subtotal</span>
-              <span>Rp 175.000</span>
-            </div>
-            <div class="summary_row">
-              <span>Diskon</span>
-              <span>-Rp 0</span>
-            </div>
-            <div class="summary_row total">
-              <span>Total</span>
-              <span>Rp 175.000</span>
-            </div>
-            <div class="summary_notes">
-              <p>* Pajak sudah termasuk</p>
-              <p>** Pastikan pesanan Anda sudah sesuai</p>
-            </div>
-            <button class="btn order_btn">Konfirmasi Pesanan</button>
-          </div>
+          <div class="item_price">Rp ${item.harga.toLocaleString()}</div>
         </div>
       </div>
-    </section>
-    <!-- end cart section -->
+      <div class="item_remove">
+        <button class="remove_btn" onclick="removeItem(${index})"><i class="fa fa-trash"></i></button>
+      </div>
+    `;
+
+    cartItemsContainer.appendChild(itemElement);
+  });
+
+  // Fungsi hapus item
+  function removeItem(index) {
+    cartData.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cartData));
+    location.reload();
+  }
+
+  // Konfirmasi pesanan
+  document.querySelector(".order_btn").addEventListener("click", () => {
+    const nama = document.getElementById("customerName").value.trim();
+    const meja = document.getElementById("tableNumber").value.trim();
+
+    if (!nama || !meja) {
+      alert("Silakan isi nama dan nomor meja.");
+      return;
+    }
+
+    const order = {
+      customerName: nama,
+      tableNumber: meja,
+      items: cartData
+    };
+
+    console.log("Pesanan dikonfirmasi:", order);
+    alert("Pesanan berhasil dikirim! Silakan tunggu.");
+
+    // Kosongkan keranjang setelah konfirmasi (opsional)
+    localStorage.removeItem("cart");
+    window.location.reload();
+  });
+</script>
+
 
     <!-- info section -->
     <section class="info_section ">
