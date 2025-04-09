@@ -380,6 +380,82 @@
 </script>
 
 
+
+    <!-- Tambahkan di bagian bawah sebelum </body> -->
+<script>
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartContainer = document.querySelector(".cart_items");
+
+  function updateCartHTML() {
+    cartContainer.innerHTML = "";
+
+    cart.forEach((item, index) => {
+      cartContainer.innerHTML += `
+        <div class="cart_item">
+          <div class="item_image">
+            <img src="${item.gambar}" alt="${item.nama}">
+          </div>
+          <div class="item_details">
+            <h5 class="item_name">${item.nama}</h5>
+            <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)"></textarea>
+            <div class="item_row">
+              <div class="item_quantity">
+                <button class="qty_btn minus" data-index="${index}">-</button>
+                <input type="text" class="qty_input" value="${item.jumlah || 1}" readonly>
+                <button class="qty_btn plus" data-index="${index}">+</button>
+              </div>
+              <div class="item_price">Rp ${(item.harga * (item.jumlah || 1)).toLocaleString()}</div>
+            </div>
+          </div>
+          <div class="item_remove">
+            <button class="remove_btn" data-index="${index}"><i class="fa fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+
+    calculateTotal();
+  }
+
+  function calculateTotal() {
+    let total = cart.reduce((sum, item) => sum + item.harga * (item.jumlah || 1), 0);
+    const totalElement = document.querySelector(".summary_row.total span:last-child");
+    if (totalElement) {
+      totalElement.textContent = "Rp " + total.toLocaleString();
+    }
+  }
+
+  document.addEventListener("click", (e) => {
+    const index = e.target.dataset.index;
+    if (e.target.classList.contains("plus")) {
+      cart[index].jumlah = (cart[index].jumlah || 1) + 1;
+    }
+    if (e.target.classList.contains("minus")) {
+      cart[index].jumlah = Math.max(1, (cart[index].jumlah || 1) - 1);
+    }
+    if (e.target.classList.contains("remove_btn")) {
+      cart.splice(index, 1);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartHTML();
+  });
+
+  document.querySelector(".order_btn")?.addEventListener("click", () => {
+    const nama = document.getElementById("customerName").value.trim();
+    const meja = document.getElementById("tableNumber").value.trim();
+    if (!nama || !meja) {
+      alert("Silakan isi nama dan nomor meja.");
+      return;
+    }
+    alert("Pesanan Anda telah dikonfirmasi. Terima kasih!");
+    localStorage.removeItem("cart");
+    location.reload();
+  });
+
+  updateCartHTML();
+</script>
+
+
     
 </body>
 </html>
