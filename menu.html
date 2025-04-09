@@ -120,18 +120,17 @@
     authDomain: "amertaresto-69d89.firebaseapp.com",
     databaseURL: "https://amertaresto-69d89-default-rtdb.firebaseio.com",
     projectId: "amertaresto-69d89",
-    storageBucket: "amertaresto-69d89.appspot.com", // kamu salah ketik di baris sebelumnya (tadi: firebasestorage.app)
+    storageBucket: "amertaresto-69d89.appspot.com",
     messagingSenderId: "338854383383",
     appId: "1:338854383383:web:b0b2fdd0be7668f6377152"
   };
-  
-// Inisialisasi Firebase
+
+  // Inisialisasi Firebase
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
 
   // Ambil data dari Realtime Database
   const menuList = document.getElementById("menu-list");
-
   const dbRef = ref(database);
 
   get(child(dbRef, 'menu')).then((snapshot) => {
@@ -141,7 +140,7 @@
 
       for (let id in data) {
         const item = data[id];
-        html += 
+        html += `
           <div class="col-sm-6 col-lg-4 all ${item.kategori.toLowerCase()}">
             <div class="box">
               <div class="img-box">
@@ -153,14 +152,13 @@
                 <div class="options">
                   <h6>Rp ${item.harga.toLocaleString()}</h6>
                   <a href="#" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                </a>
-
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-        ;
+        `;
       }
 
       menuList.innerHTML = html;
@@ -170,8 +168,8 @@
   }).catch((error) => {
     console.error("Gagal ambil data: ", error);
   });
-
 </script>
+
 
 
       
