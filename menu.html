@@ -152,9 +152,14 @@
                 <p>${item.deskripsi}</p>
                 <div class="options">
                   <h6>Rp ${item.harga.toLocaleString()}</h6>
-                  <a href="#" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </a>
+                  <a href="cart.html" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                    viewBox="0 0 456.029 456.029" style="width: 24px; height: 24px; fill: #fff;">
+                    <g><g><path d="M345.6,338.862c-29.184,..."/></g></g>
+                    <g><g><path d="M439.296,84.91c-1.024,..."/></g></g>
+                    <g><g><path d="M215.04,389.55c-1.024,..."/></g></g>
+                  </svg>
+                </a>
                 </div>
               </div>
             </div>
@@ -170,10 +175,11 @@
     console.error("Gagal ambil data: ", error);
   });
 
-
-
-
 </script>
+
+<!-- <a href="#" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  </a> -->
 
       
 <!--
