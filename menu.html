@@ -895,6 +895,35 @@
 </script>
 
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Isotope -->
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+
+
+<script>
+  $(document).ready(function(){
+    // Inisialisasi Isotope
+    var $grid = $('.grid').isotope({
+      itemSelector: '.col-sm-6',
+      layoutMode: 'fitRows'
+    });
+
+    // Event listener untuk tombol filter
+    $('.filters_menu li').on('click', function(){
+      $('.filters_menu li').removeClass('active');
+      $(this).addClass('active');
+
+      var filterValue = $(this).attr('data-filter');
+      $grid.isotope({ filter: filterValue });
+    });
+  });
+</script>
+
+
+
 
 
 </body>
