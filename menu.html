@@ -95,7 +95,7 @@
     const menuList = document.getElementById("menu-list");
     const dbRef = ref(database);
 
-    get(child(dbRef, '/')).then((snapshot) => {
+    get(child(dbRef, 'menu')).then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
         let html = '';
