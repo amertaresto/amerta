@@ -2,68 +2,39 @@
 <html>
 
 <head>
-  <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-
   <title>Amerta Restaurant</title>
 
-
-  <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
-  <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
-
-  <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <!-- nice select -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
-  <!-- slidck slider -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map" integrity="undefined" crossorigin="anonymous" />
-
-
-  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" crossorigin="anonymous" />
   <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
   <style>
     .add-to-cart i {
       color: white !important;
     }
   </style>
-
 </head>
 
 <body class="sub_page">
-
   <div class="hero_area">
-    <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href="index.html">
-            <span>
-              Amerta Restaurant
-            </span>
+            <span>Amerta Restaurant</span>
           </a>
-          <div class="" id="">
+          <div class="">
             <div class="User_option">
-              <a href="">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span>Login</span>
-              </a>
-              <form class="form-inline ">
+              <a href=""><i class="fa fa-user"></i><span>Login</span></a>
+              <form class="form-inline">
                 <button class="btn nav_cart-btn" type="button">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i class="fa fa-shopping-cart"></i>
                 </button>
               </form>
             </div>
@@ -84,996 +55,102 @@
         </nav>
       </div>
     </header>
-    <!-- end header section -->
   </div>
-  <!-- food section -->
 
   <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2>
-          Menu Amerta
-        </h2>
+        <h2>Menu Amerta</h2>
       </div>
 
-      <!-- Filter menu -->
-<ul class="filters_menu">
-  <li class="active" data-filter="*">All</li>
-  <li data-filter=".nasi">Nasi</li>
-  <li data-filter=".sup">Sup Kuah</li>
-  <li data-filter=".penutup">Penutup</li>
-  <li data-filter=".minum">Minum</li>
-</ul>
+      <ul class="filters_menu">
+        <li class="active" data-filter="*">All</li>
+        <li data-filter=".nasi">Nasi</li>
+        <li data-filter=".sup">Sup Kuah</li>
+        <li data-filter=".penutup">Penutup</li>
+        <li data-filter=".minum">Minum</li>
+      </ul>
 
-<!-- Container untuk daftar menu -->
-<div class="row filters-content" id="menu-list"></div>
-
-<!-- Hanya ini yang dibutuhkan untuk Firebase v9 dengan module -->
-<script type="module">
-  // Import dari CDN (versi module)
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
-
-  // Konfigurasi Firebase
-  const firebaseConfig = {
-  apiKey: "AIzaSyB7ikwR3R-1W99pIZeg9B6yEYBLDBuHOrc",
-  authDomain: "amertaresto-6f7e6.firebaseapp.com",
-  databaseURL: "https://amertaresto-6f7e6-default-rtdb.firebaseio.com",
-  projectId: "amertaresto-6f7e6",
-  storageBucket: "amertaresto-6f7e6.firebasestorage.app",
-  messagingSenderId: "1037291139779",
-  appId: "1:1037291139779:web:33a9e59f4503ad51516876",
-  measurementId: "G-T5TTGJLR9Z"
-};
-
-  // Inisialisasi Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-
-  // Ambil data dari Realtime Database
-  const menuList = document.getElementById("menu-list");
-  const dbRef = ref(database);
-
-  get(child(dbRef, 'menu')).then((snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      let html = '';
-
-      for (let id in data) {
-        const item = data[id];
-        html += `
-          <div class="col-sm-6 col-lg-4 all ${item.kategori.toLowerCase()}">
-            <div class="box">
-              <div class="img-box">
-                <img src="${item.gambar}" alt="${item.nama}">
-              </div>
-              <div class="detail-box">
-                <h5>${item.nama}</h5>
-                <p>${item.deskripsi}</p>
-                <div class="options">
-                  <h6>Rp ${item.harga.toLocaleString()}</h6>
-                  <a href="cart.html" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      menuList.innerHTML = html;
-    } else {
-      console.log("Tidak ada data menu.");
-    }
-  }).catch((error) => {
-    console.error("Gagal ambil data: ", error);
-  });
-
-  </script>
-
-
-  <!--
-  // Event listener untuk tombol add-to-cart
-document.addEventListener('click', function (e) {
-  if (e.target.closest('.add-to-cart')) {
-    e.preventDefault();
-    
-    const button = e.target.closest('.add-to-cart');
-    const nama = button.dataset.nama;
-    const harga = parseInt(button.dataset.harga);
-    const gambar = button.dataset.gambar;
-
-    const item = { nama, harga, gambar, jumlah: 1 };
-
-    // Ambil keranjang dari localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Cek apakah item sudah ada
-    const existingItem = cart.find(i => i.nama === item.nama);
-    if (existingItem) {
-      existingItem.jumlah += 1;
-    } else {
-      cart.push(item);
-    }
-
-    // Simpan kembali ke localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    alert(`${item.nama} ditambahkan ke keranjang!`);
-  }
-});
-
--->
-
-
-      
-<!--
-<script>
-  // Tunggu DOM selesai dimuat
-  document.addEventListener("DOMContentLoaded", () => {
-    // Karena menu ditambahkan secara dinamis, kita perlu delay sampai DOM menu terisi
-    setTimeout(() => {
-      const cartButtons = document.querySelectorAll(".add-to-cart");
-
-      cartButtons.forEach(button => {
-        button.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          const nama = this.dataset.nama;
-          const harga = parseInt(this.dataset.harga);
-          const gambar = this.dataset.gambar;
-
-          const item = { nama, harga, gambar };
-
-          // Ambil keranjang dari localStorage, jika belum ada, buat array baru
-          let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-          // Tambahkan item
-          cart.push(item);
-
-          // Simpan kembali ke localStorage
-          localStorage.setItem("cart", JSON.stringify(cart));
-
-          alert(`${nama} berhasil ditambahkan ke keranjang!`);
-        });
-      });
-    }, 1000); // beri waktu untuk data dari Firebase dirender ke halaman
-  });
-</script>
--->
-
-
-<script>
-  // Tambahkan listener untuk filter kategori
-  document.querySelectorAll('.filters_menu li').forEach(item => {
-    item.addEventListener('click', function() {
-      const filter = this.getAttribute('data-filter');
-      document.querySelectorAll('.filters_menu li').forEach(li => li.classList.remove('active'));
-      this.classList.add('active');
-
-      document.querySelectorAll('#menu-list > div').forEach(card => {
-        if (filter === '*' || card.classList.contains(filter.substring(1))) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-</script>
-
-<!--
-      <div class="filters-content">
-        <div class="row grid">
-          <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f1.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Sop Iga Sapi
-                  </h5>
-                  <p>
-                    Sop Iga Sapi Amerta, kuah gurih dengan iga empuk, rempah melimpah, hangat nikmat, sajian khas penuh kelezatan.
-                  </p>
-                  <div class="options">
-                    <h6>
-                      Rp 70,000
-                    </h6>
-
--->
-                 <!--   
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f2.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Burger
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $15
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f3.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Pizza
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $17
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all pasta">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f4.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Pasta
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $18
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all fries">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f5.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    French Fries
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $10
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f6.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Pizza
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $15
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f7.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Tasty Burger
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $12
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f8.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Tasty Burger
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $14
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all pasta">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/f9.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Pasta
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $10
-                    </h6>
-                    <a href="cart.html">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
-      
-      <div class="btn-box">
-        <a href="">
-          View More
-        </a>
-      </div>
+      <div class="row filters-content" id="menu-list"></div>
     </div>
-  </section> 
+  </section>
 
-  <!-- end food section -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-  <div class="footer_container">
-    <!-- info section -->
-    <section class="info_section ">
-      <div class="container">
-        <div class="contact_box">
-          <a href="">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-phone" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="info_links">
-          <ul>
-            <li class="active">
-              <a href="index.html">
-                Beranda
-              </a>
-            </li>
-            <li>
-              <a href="menu.html">
-                Menu
-              </a>
-            </li>
-            <li>
-              <a class="" href="blog.html">
-                Berita terkini
-              </a>
-            </li>
-            <li>
-              <a class="" href="testimonial.html">
-                Cerita Mereka di Amerta
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="social_box">
-          <a href="">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-whatsapp" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-    <!-- end info_section -->
+    const firebaseConfig = {
+      apiKey: "AIzaSyB7ikwR3R-1W99pIZeg9B6yEYBLDBuHOrc",
+      authDomain: "amertaresto-6f7e6.firebaseapp.com",
+      databaseURL: "https://amertaresto-6f7e6-default-rtdb.firebaseio.com",
+      projectId: "amertaresto-6f7e6",
+      storageBucket: "amertaresto-6f7e6.firebasestorage.app",
+      messagingSenderId: "1037291139779",
+      appId: "1:1037291139779:web:33a9e59f4503ad51516876",
+      measurementId: "G-T5TTGJLR9Z"
+    };
 
-    <!-- footer section -->
-    <footer class="footer_section">
-      <div class="container">
-        <p>
-         &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Amerta Restaurant</a><br>
-          Template By: <a href="https://themewagon.com/">ThemeWagon</a>
-        </p>
-      </div>
-    </footer>
-    <!-- footer section -->
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const menuList = document.getElementById("menu-list");
+    const dbRef = ref(database);
 
-  </div>
-  <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
-  <!-- slick  slider -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
-  <!-- nice select -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
-  <!-- custom js -->
-  <script src="js/custom.js"></script>
+    get(child(dbRef, '/')).then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        let html = '';
 
+        for (let id in data) {
+          const item = data[id];
+          html += `
+            <div class="col-sm-6 col-lg-4 all ${item.kategori.toLowerCase()} menu-item">
+              <div class="box">
+                <div class="img-box">
+                  <img src="${item.gambar}" alt="${item.nama}">
+                </div>
+                <div class="detail-box">
+                  <h5>${item.nama}</h5>
+                  <p>${item.deskripsi}</p>
+                  <div class="options">
+                    <h6>Rp ${item.harga.toLocaleString()}</h6>
+                    <a href="cart.html" class="add-to-cart" data-nama="${item.nama}" data-harga="${item.harga}" data-gambar="${item.gambar}">
+                      <i class="fa fa-shopping-cart"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
 
-<script>
+        menuList.innerHTML = html;
+      } else {
+        console.log("Tidak ada data menu.");
+      }
+    }).catch((error) => {
+      console.error("Gagal ambil data: ", error);
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
       const filterButtons = document.querySelectorAll(".filters_menu li");
-      const filterItems = document.querySelectorAll(".filters-content .all");
-  
+
       filterButtons.forEach(button => {
         button.addEventListener("click", () => {
-          // Hapus class 'active' dari semua tombol
           filterButtons.forEach(btn => btn.classList.remove("active"));
-          // Tambahkan class 'active' ke tombol yang diklik
           button.classList.add("active");
-  
-          const filter = button.getAttribute("data-filter").replace('.', '');
-  
-          filterItems.forEach(item => {
-            if (filter === "*" || item.classList.contains(filter)) {
-              item.style.display = "block";
+
+          const filter = button.getAttribute("data-filter").replace(".", "");
+
+          document.querySelectorAll("#menu-list > div").forEach(card => {
+            if (filter === "*" || card.classList.contains(filter)) {
+              card.style.display = "";
             } else {
-              item.style.display = "none";
+              card.style.display = "none";
             }
           });
         });
       });
     });
   </script>
-      
-  
 </body>
-
 </html>
