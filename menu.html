@@ -874,6 +874,29 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
 
+
+
+
+
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script>
+  var $grid = $('.grid').isotope({
+    itemSelector: '.all',
+    layoutMode: 'fitRows'
+  });
+
+  $('.filters_menu li').on('click', function() {
+    $('.filters_menu li').removeClass('active');
+    $(this).addClass('active');
+
+    var filterValue = $(this).attr('data-filter');
+    $grid.isotope({ filter: filterValue });
+  });
+</script>
+
+
+
+
 </body>
 
 </html>
