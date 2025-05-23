@@ -312,6 +312,73 @@
 </script>
 
    
+<script>
+function renderCartItems() {
+  const cartItemsContainer = document.getElementById("cart_items");
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartItemsContainer.innerHTML = "";
+
+  let total = 0;
+
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `<p class="text-center">Keranjang Anda kosong.</p>`;
+    document.getElementById("cart_subtotal").innerText = "Rp 0";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    const jumlah = item.jumlah || 1;
+    const harga = item.harga;
+    const itemTotal = jumlah * harga;
+    total += itemTotal;
+
+    const cartItem = document.createElement("div");
+    cartItem.className = "cart_item";
+    cartItem.innerHTML = `
+      <div class="item_image">
+        <img src="${item.gambar || 'images/f1.png'}" alt="${item.nama}">
+      </div>
+      <div class="item_details">
+        <h5 class="item_name">${item.nama}</h5>
+        <div class="item_custom">
+          <textarea class="form-control custom_notes" placeholder="Catatan khusus (opsional)">${item.catatan || ""}</textarea>
+        </div>
+        <div class="item_row">
+          <div class="item_quantity">
+            <button class="qty_btn minus" onclick="updateQty(${index}, -1)"><i class="fa fa-minus"></i></button>
+            <input type="text" class="qty_input" value="${jumlah}" readonly>
+            <button class="qty_btn plus" onclick="updateQty(${index}, 1)"><i class="fa fa-plus"></i></button>
+          </div>
+          <div class="item_price">Rp ${itemTotal.toLocaleString("id-ID")}</div>
+        </div>
+      </div>
+      <div class="item_remove">
+        <button class="remove_btn" onclick="removeItem(${index})"><i class="fa fa-trash"></i></button>
+      </div>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+  });
+
+  document.getElementById("cart_subtotal").innerText = `Rp ${total.toLocaleString("id-ID")}`;
+}
+
+function updateQty(index, change) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart[index].jumlah = (cart[index].jumlah || 1) + change;
+  if (cart[index].jumlah < 1) cart[index].jumlah = 1;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCartItems();
+}
+
+function removeItem(index) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCartItems();
+}
+
+document.addEventListener("DOMContentLoaded", renderCartItems);
+</script>
 
  
     
